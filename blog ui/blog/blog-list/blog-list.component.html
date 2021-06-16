@@ -1,0 +1,50 @@
+<div id="blog">
+    <!-- <div> -->
+        <app-header></app-header>
+    <!-- </div> -->
+    <div class="wrapper" fxLayout="row wrap">
+        <div fxFlex="100" fxLayout="row wrap" class="mt-100">
+            <div fxFlex class="content">
+                <h1 class=" blog-title">Blog</h1>
+                <p class="blog-heading">Everything we know about tech & recruitment</p>
+                <p class="blog-content">Check out our events, studies and tool for tech pros and hiring managers.</p>
+                <div class="mt-48">
+                      <form action="/action_page.php" class="search">
+                        <input placeholder="Search blog..." class="bar" [formControl]="searchControl"
+                        [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWithObject">
+                            <mat-option *ngFor="let data of filteredData | async" [value]="data">
+                              {{data.title}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <button type="submit" class="btn-search" (click)="searchData()"><mat-icon>search</mat-icon></button>
+                      </form>
+                      <!-- {{searchName.value}} -->
+                </div>
+            </div>
+            <div class="" fxFlex="40" fxHide.lt-sm>
+                <!-- <img src="../../../../../../assets/images/avatars/ID3.png" /> -->
+            </div>
+        </div>
+        <div fxFlex="100" class="bottom-section my-60" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-between center" >
+            <mat-card fxFlex="32" fxFlex.lt-sm="100" class="my-12" *ngFor="let data of jsonData">
+                <div class="card-top">
+                    <p class="font-weight-600 mt-0 font-size-20 clamp-1" [matTooltip]="data?.title">{{data?.title}} </p>
+                    <div class="img-logo">
+                        <img src="{{path + data?.users_permissions_user?.user_image[0]?.url}}">
+                        <div class="details">
+                            <p class="fs-007">{{data?.users_permissions_user?.username}}</p>
+                            <p>{{data?.users_permissions_user?.designation}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-16">
+                    <p class="blue-c font-weight-700" routerLink="/blog/details" [queryParams]="{id: data?.id}">{{data?.created_at|date}}</p>
+                    <p class="font-size-20 fs-22 clamp-2">{{data?.content}}</p>
+                    <p class="blue-c font-weight-700" routerLink="/blog/details" [queryParams]="{id: data?.id}"><span>Read more </span><mat-icon>arrow_right_alt</mat-icon></p>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <landing-footer></landing-footer>
+</div>

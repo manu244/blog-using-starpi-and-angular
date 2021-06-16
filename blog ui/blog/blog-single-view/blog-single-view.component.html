@@ -1,0 +1,39 @@
+<div id="blog-details" fxFlex="100">
+    <!-- <div> -->
+        <app-header></app-header>
+    <!-- </div> -->
+    <div class=" mt-72" fxLayout="column">
+        <img src="{{path + blogData?.image.url}}" class="cover-img">
+        <div class="header pt-12">
+            <h1>{{blogData?.title | titlecase}}</h1>
+            <mat-divider class="first-divider"></mat-divider>
+            <p>{{blogData?.users_permissions_user?.username|titlecase}} {{blogData?.created_at|date}}</p>
+            <mat-divider class="second-divider"></mat-divider>
+            <!-- <div class="overlay"></div> -->
+          </div>
+          
+          <div class="content text-justify">
+            <p>{{blogData?.content}}</p>
+          </div>
+          <div fxFlex="100" class="bottom-section my-60 px-24" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-between center" >
+            <mat-card fxFlex="32" fxFlex.lt-sm="100" class="my-12" *ngFor="let data of blogListData">
+                <div class="card-top">
+                    <p class="font-weight-600 mt-0 font-size-20 clamp-1" [matTooltip]="data?.title">{{data?.title}} </p>
+                    <div class="img-logo">
+                        <img src="{{path + data?.users_permissions_user?.user_image[0]?.url}}">
+                        <div class="details">
+                            <p class="fs-007">{{data?.users_permissions_user?.username}}</p>
+                            <p>{{data?.users_permissions_user?.designation}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-16">
+                    <p class="blue-c font-weight-700" routerLink="/blog/details"  [queryParams]="{id: data?.id}">{{data?.created_at|date}}</p>
+                    <p class="font-size-20 fs-22 clamp-2">{{data?.content}}</p>
+                    <p class="blue-c font-weight-700" routerLink="/blog/details" [queryParams]="{id: data?.id}"><span>Read more </span><mat-icon>arrow_right_alt</mat-icon></p>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <landing-footer></landing-footer>
+</div>
